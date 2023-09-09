@@ -26,6 +26,8 @@ public class CharacSelector : MonoBehaviourPunCallbacks
         characID = "ª±®a1";
         photonView.RPC("DisableButton", RpcTarget.AllBuffered, "charac1");
         SceneManager.LoadScene("ChatScene");
+
+        //StartCoroutine(Wait2ChangeScene());
     }
 
     public void OnCharac2BtnClick()
@@ -36,13 +38,29 @@ public class CharacSelector : MonoBehaviourPunCallbacks
         characID = "ª±®a2";
         photonView.RPC("DisableButton", RpcTarget.AllBuffered, "charac2");
         SceneManager.LoadScene("ChatScene");
+
+        //StartCoroutine(Wait2ChangeScene());
     }
 
+    /// <summary>
+    /// Ãö±¼«ö¶s
+    /// </summary>
+    /// <param name="characPressed"></param>
     [PunRPC]
     void DisableButton(string characPressed)
     {
         charac1.interactable = characPressed == "charac1" ? false : true;
         charac2.interactable = characPressed == "charac2" ? false : true;
+    }
+
+    /// <summary>
+    /// wait
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Wait2ChangeScene()
+    {
+        yield return new WaitForSeconds(sePlayer.MusicLength() - 1);
+        SceneManager.LoadScene("ChatScene");
     }
 
     // Start is called before the first frame update

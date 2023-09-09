@@ -65,9 +65,18 @@ public class MusicPlayer : MonoBehaviour
         bgm.clip = Array.Find(ACSource, source => source.name == bgmID2Change);
     }
 
+    /// <summary>
+    /// ­µ¼Ö¼·©ñª¬ºA
+    /// </summary>
+    /// <returns></returns>
     public bool IsMusicPlaying()
     {
         return bgm.isPlaying;
+    }
+
+    public float MusicLength()
+    {
+        return bgm.clip.length;
     }
 
     void Awake()
