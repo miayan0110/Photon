@@ -16,8 +16,13 @@ public class CharacSelector : MonoBehaviourPunCallbacks
     RoomOptions roomOptions = new RoomOptions() { MaxPlayers = 2 };
     int roomCount;
 
+    MusicPlayer bgmPlayer, sePlayer;
+
     public void OnCharac1BtnClick()
     {
+        // 撥放音效
+        sePlayer.Play("Press");
+
         characID = "玩家1";
         photonView.RPC("DisableButton", RpcTarget.AllBuffered, "charac1");
         SceneManager.LoadScene("ChatScene");
@@ -25,6 +30,9 @@ public class CharacSelector : MonoBehaviourPunCallbacks
 
     public void OnCharac2BtnClick()
     {
+        // 撥放音效
+        sePlayer.Play("Press");
+
         characID = "玩家2";
         photonView.RPC("DisableButton", RpcTarget.AllBuffered, "charac2");
         SceneManager.LoadScene("ChatScene");
@@ -44,6 +52,10 @@ public class CharacSelector : MonoBehaviourPunCallbacks
         charac1.interactable = false;
         charac2.interactable = false;
         PhotonNetwork.ConnectUsingSettings();
+
+        bgmPlayer = GameObject.Find("BGMPlayer").GetComponent<MusicPlayer>();
+        sePlayer = GameObject.Find("SoundEffectPlayer").GetComponent<MusicPlayer>();
+        bgmPlayer.Play("Bgm1", true);
     }
 
 
